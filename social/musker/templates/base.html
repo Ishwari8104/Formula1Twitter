@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FORMULA</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/ca1764206e.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-color: yellow;
+        }
+        
+  
+    </style>
+    <script>
+        // Function to set the theme
+        function setTheme(theme) {
+            var body = document.body;
+            var navbar = document.querySelector('.navbar');
+
+            if (theme === 'Ferrari') {
+                body.style.backgroundColor = '#FFEF00';
+                body.style.color = 'black';
+                navbar.classList.remove('navbar-dark');
+                navbar.classList.add('navbar-light');
+            } else if (theme === 'RedBull') {
+                body.style.backgroundColor = '#191970';
+                body.style.color = '#FED502';
+                navbar.classList.remove('navbar-light');
+                navbar.classList.add('navbar-dark');
+              
+            }
+
+            // Store the selected theme in local storage
+            localStorage.setItem('selectedTheme', theme);
+        }
+
+        // Function to get the selected theme from local storage
+        function getSelectedTheme() {
+            return localStorage.getItem('selectedTheme');
+        }
+
+        // On page load, set the theme if it exists in local storage
+        document.addEventListener('DOMContentLoaded', function () {
+            var selectedTheme = getSelectedTheme();
+            if (selectedTheme) {
+                setTheme(selectedTheme);
+            }
+        });
+    </script>
+</head>
+<body>
+{% include 'navbar.html' %}
+<div class='container'>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>{{ message.tags }}</strong> {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% block content %}
+    {% endblock %}
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+</body>
+</html>
