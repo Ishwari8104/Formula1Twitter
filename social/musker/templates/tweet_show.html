@@ -25,7 +25,7 @@
                                 <img src="https://tse3.mm.bing.net/th?id=OIP.ruat7whad9-kcI8_1KH_tQHaGI&pid=Api&P=0&h=180" alt="{{profile.user.username}}" width=50 height=50 class="rounded-circle">
                             {% endif %}
                             <small class="text-muted">
-                                ({{tweet.created_at}}) by @{{tweet.user.username}}-{{tweet.number_of_likes}} Likes-
+                                ({{tweet.created_at}}) by @{{tweet.user.username}}-{{tweet.number_of_likes}} 
                                 {% if user in tweet.likes.all %}
                                     <a href="{% url 'tweet_like' tweet.id %}"><i class="fa-solid fa-heart " style="color:red"></i></a>
                                 {% else %}

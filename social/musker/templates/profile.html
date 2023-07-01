@@ -44,6 +44,8 @@
 
                         {% if request.user.username == profile.user.username %}
                         <a href="{% url 'delete_tweet' tweet.id %}"><i class="fa-solid fa-trash" style="color:black"></i></a>
+                        &nbsp;&nbsp;
+                        <a href="{% url 'edit_tweet' tweet.id %}"><i class="fa-solid fa-edit" style="color:black"></i></a>
                         {% endif %}
                     </small></h5>
                     <div class="card-body">
@@ -94,11 +96,14 @@
                         <div class="card-body">
                             <h5 class="card-title"><strong>Follows</strong></h5>
                             <p class="card-text">
-                                {% for following in profile.follows.all %}
+                                {% for following in profile.follows.all|slice:5 %}
                                 <a href="{% url 'profile' following.user.id %}">
                                 @{{following}}</a><br>
                                 {% endfor %}
                             </p>
+                            <div class="card-footer" style="border-bottom: 1px solid #ccc;">
+                                <a href="{% url 'follows' profile.user.id %}" class="btn btn-sm">See all..</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -107,11 +112,15 @@
                         <div class="card-body">
                             <h5 class="card-title"><strong>Followed by</strong></h5>
                             <p class="card-text">
-                                {% for following in profile.followed_by.all %}
+                                {% for following in profile.followed_by.all|slice:5 %}
                                 <a href="{% url 'profile' following.user.id %}">
                                 @{{following}}</a><br>
                                 {% endfor %}
                             </p>
+                        </br>
+                        <div class="card-footer" style="border-bottom: 1px solid #ccc;">
+                            <a href="{% url 'followers' profile.user.id %}" class="btn btn-sm">See all..</a>
+                        </div>
                         </div>
                     </div>
                 </div></br>

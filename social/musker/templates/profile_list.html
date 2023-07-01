@@ -1,54 +1,57 @@
 {% extends 'base.html' %}
+
 {% block content %}
     <h1>Profile List</h1>
-<br/>
+    <br/>
 
-{% if profiles %}
-    {% for profile in profiles %}
-    <style>
-        a:link {
-            color: black; /* Passive link color */
-        }
-    
-        a:visited {
-            color: black; /* Passive link color for visited links */
-        }
-    
-        a:hover {
-            color: white; /* Active link color on hover */
-        }
-    
-        a:active {
-            color: white; /* Active link color when clicked */
-        }
-    </style>
-    <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
-        <div class="card-header">
-            Last Updated: {{ profile.date_modified }}
-        </div>
-        <div class="card-body">
-            <div class="d-flex">
-                {% if profile.profile_image %}
-                    <img src="{{profile.profile_image.url}}" alt="{{profile.user.username}}" class="rounded-circle mr-3" style="width: 50px;" >
-                {% else %}
-                <img src="https://www.pngarts.com/files/10/Default-Profile-Picture-Transparent-Image.png" alt="{{profile.user.username}}" class="mr-3" style="width: 50px;">
+    {% if profiles %}
+        <div class="row">
+            {% for profile in profiles %}
+                <div class="col-md-4">
+                    <style>
+                        a:link {
+                            color: black; /* Passive link color */
+                        }
 
-                {% endif %}
-                
-                <div>
-                    <h5 class="card-title">{{ profile.user.username }}</h5>
-                    <p class="card-text">
-                        <a href="{% url 'profile' profile.user.id %}">
-                            @{{ profile.user.username|lower }}
-                        </a>
-                    </p>
+                        a:visited {
+                            color: black; /* Passive link color for visited links */
+                        }
+
+                        a:hover {
+                            color: white; /* Active link color on hover */
+                        }
+
+                        a:active {
+                            color: white; /* Active link color when clicked */
+                        }
+                    </style>
+                    <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
+                        <div class="card-header">
+                            Last Updated: {{ profile.date_modified }}
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex">
+                                {% if profile.profile_image %}
+                                    <img src="{{ profile.profile_image.url }}" alt="{{ profile.user.username }}" class="rounded-circle mr-3" style="width: 50px;">
+                                {% else %}
+                                    <img src="https://www.pngarts.com/files/10/Default-Profile-Picture-Transparent-Image.png" alt="{{ profile.user.username }}" class="mr-3" style="width: 50px;">
+                                {% endif %}
+                                <div>
+                                    <h5 class="card-title">{{ profile.user.username }}</h5>
+                                    <p class="card-text">
+                                        <a href="{% url 'profile' profile.user.id %}">
+                                            @{{ profile.user.username|lower }}
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+                {% if forloop.counter|divisibleby:3 and not forloop.last %}
+                    </div><div class="row">
+                {% endif %}
+            {% endfor %}
         </div>
-    </div>
-    
-        <br/><br/>
-        
-    {% endfor %}
-{% endif %} 
+    {% endif %}
 {% endblock %}

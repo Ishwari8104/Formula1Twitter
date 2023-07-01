@@ -51,6 +51,30 @@ def profile(request,pk):
         messages.add_message(request,messages.WARNING,("Red Flag!You must be logged in!"))
         return redirect('home')
     
+def followers(request,pk):
+    if request.user.is_authenticated:
+        if request.user.id==pk:
+            profiles=Profile.objects.get(user_id=pk)
+            return render(request,'followers.html',{'profiles':profiles})
+        else:
+            messages.add_message(request,messages.WARNING,("3-place Grid Penalty!That's not your profile!"))
+            return redirect('home')
+    else:
+        messages.add_message(request,messages.WARNING,("Red Flag!You must be logged in!"))
+        return redirect('home')
+    
+def follows(request,pk):
+    if request.user.is_authenticated:
+        if request.user.id==pk:
+            profiles=Profile.objects.get(user_id=pk)
+            return render(request,'follows.html',{'profiles':profiles})
+        else:
+            messages.add_message(request,messages.WARNING,("3-place Grid Penalty!That's not your profile!"))
+            return redirect('home')
+    else:
+        messages.add_message(request,messages.WARNING,("Red Flag!You must be logged in!"))
+        return redirect('home')
+    
 def login_user(request):
     if request.method=="POST":
         username=request.POST['username']
@@ -147,4 +171,31 @@ def delete_tweet(request,pk):
         else:
             messages.add_message(request,messages.WARNING,("5-second penalty!That's not your tweet!"))
             return redirect(request.META.get('HTTP_REFERER'))
+    else:
+        messages.add_message(request,messages.WARNING,("Red flag!Log in to continue racing!"))
+        return redirect(request.META.get('HTTP_REFERER'))
+def edit_tweet(request,pk):
+    if request.user.is_authenticated:
+        tweet=get_object_or_404(Tweet,id=pk)
+        if request.user.username==tweet.user.username:
+            
+            form = TweetForm(request.POST or None,instance=tweet)
+            if request.method == "POST":
+                if form.is_valid():
+                    tweet = form.save(commit=False)
+                    tweet.user = request.user
+                    tweet.save()
+                    messages.add_message(request,messages.SUCCESS, "Your tweet is updated!")
+                    return redirect('home')
+            else:
+        
+                return render(request,'edit_tweet.html',{"form":form,"tweet":tweet})
+            
+        
+        else:
+            messages.add_message(request,messages.WARNING,("5-second penalty!That's not your tweet!"))
+            return redirect(request.META.get('HTTP_REFERER'))
+    else:
+        messages.add_message(request,messages.WARNING,("Red flag!Log in to continue racing!"))
+        return redirect('home')
         
