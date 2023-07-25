@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-6_e=72qhp&t(i-$6%d%8j(%xk145@pax*1-dbr2g_4z+n+h9l4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.vercel.app','.now.sh','127.0.0.1','localhost']
 
 
 # Application definition
@@ -77,8 +77,12 @@ WSGI_APPLICATION = 'social.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',  # Database name
+        'USER': 'postgres',  # Database user
+        'PASSWORD': 'VAUkiHfTAlFZPjRZEhxY',  # Database password
+        'HOST': 'containers-us-west-65.railway.app',  # Database host
+        'PORT': '7118',  # Database port
     }
 }
 
@@ -118,6 +122,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+#STATICFILES_DIRS=os.path.join(BASE_DIR,'static'),
+#STATIC_ROOT=os.path.join(BASE_DIR,'staticfiles_build','static')
 MEDIA_URL='media/'
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 
