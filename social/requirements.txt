@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 aiofiles==22.1.0
 aiosqlite==0.18.0
 anyio==3.6.2
@@ -108,3 +109,11 @@ websocket-client==1.5.1
 whitenoise==6.5.0
 y-py==0.5.5
 ypy-websocket==0.8.2
+=======
+asgiref==3.7.2
+Django==4.2.2
+Pillow==9.5.0
+psycopg2==2.9.6
+sqlparse==0.4.4
+tzdata==2023.3
+>>>>>>> 81418dc177754db4dafcf6ceb8691380a9ca78f5
