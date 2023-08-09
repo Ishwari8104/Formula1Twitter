@@ -12,9 +12,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
-import django_heroku
-import dj_database_url
-from decouple import config
+#import django_heroku
+#import dj_database_url
+#from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -52,11 +52,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-<<<<<<< HEAD
-    'whitenoise.middleware.WhiteNoiseMiddleware'
-=======
-    'whitenoise.middleware.WhiteNoiseMiddleware',
->>>>>>> 81418dc177754db4dafcf6ceb8691380a9ca78f5
+
+
 ]
 
 ROOT_URLCONF = 'social.urls'
@@ -85,12 +82,8 @@ WSGI_APPLICATION = 'social.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',  # Database name
-        'USER': 'postgres',  # Database user
-        'PASSWORD': 'VAUkiHfTAlFZPjRZEhxY',  # Database password
-        'HOST': 'containers-us-west-65.railway.app',  # Database host
-        'PORT': '7118',  # Database port
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -130,16 +123,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+#STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 #STATICFILES_DIRS=os.path.join(BASE_DIR,'static'),
 #STATIC_ROOT=os.path.join(BASE_DIR,'staticfiles_build','static')
 MEDIA_URL='media/'
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
-STATICFILES_STORAGE='whitenoise.storage.CompressedManifestStaticFilesStorage'
+#STATICFILES_STORAGE='whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-django_heroku.settings(locals())
+#django_heroku.settings(locals())
